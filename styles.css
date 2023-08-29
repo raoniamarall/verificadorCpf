@@ -1,43 +1,59 @@
+/* Estilo para o corpo da página */
 body {
-  background-color: #ec5454;
-  font-family: "Roboto", sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #212529;
-  text-align: left;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
+
+/* Estilo para o cabeçalho */
 header {
+  background-color: #333;
+  color: #fff;
   text-align: center;
-  margin-top: 1rem;
-  border-radius: 4px;
+  padding: 10px 0;
 }
-h1 {
-  font-size: 2rem;
-  font-weight: 500;
-  line-height: 1.2;
-  margin: 0 0 1rem 0;
-  text-align: center;
-}
-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  width: 100%;
-  max-width: 400px;
-  padding: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+
+/* Estilo para o container principal */
+.container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
   background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-footer {
-  text-align: center;
-  margin-top: 1rem;
+
+/* Estilo para o campo de input de CPF */
+#cpfInput {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+
+/* Estilo para o botão */
+button {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+/* Estilo para a lista de CPFs */
+#listaCpfs {
+  list-style: none;
+  padding: 0;
+}
+
+#listaCpfs li {
+  padding: 5px 0;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
