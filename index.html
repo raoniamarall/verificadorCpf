@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- The charset meta tag tells the browser which character set to use to render the page -->
+    <meta charset="UTF-8" />
+    <!-- The viewport meta tag tells the browser how to render the page on different screen sizes -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- The link tag allows us to link to external files, like stylesheets -->
+    <link rel="stylesheet" href="styles.css" />
+    <title>verificador de cnpf e cnpj</title>
+  </head>
+  <body>
+    <!-- The header tag is used to mark the header of a page -->
+    <header>
+      <!-- The h1 tag is used for headers -->
+      <h1>Verificador</h1>
+    </header>
+    <section>
+      <input
+        type="text"
+        name="cpf"
+        id="cpf"
+        placeholder="CPF"
+        maxlength="14"
+        onkeypress="formatar('###.###.###-##', this)"
+        required
+      />
+
+      <button>salvar</button>
+    </section>
+    <script src="script.js"></script>
+  </body>
+  <footer>
+    <p>sendo desenvolvido por rato</p>
+  </footer>
+</html>
