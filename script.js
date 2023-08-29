@@ -44,6 +44,7 @@ function validarCPF(cpf) {
 
 const cpfsList = JSON.parse(localStorage.getItem("cpfs")) || [];
 const cpfInput = document.querySelector("#cpf");
+const listaCpfs = document.getElementById("listaCpfs"); // Referência à lista de CPFs
 
 cpfInput.addEventListener("input", () => {
   formatar("###.###.###-##", cpfInput);
@@ -72,3 +73,31 @@ cpfInput.addEventListener("blur", () => {
     alert("CPF cadastrado com sucesso!");
   }
 });
+
+// Função para formatar CPF para exibição
+function formatarCpf(cpf) {
+  return cpf
+    .replace(/\D/g, "")
+    .replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+}
+
+// Preencher a lista de CPFs salvos no localStorage
+cpfsList.forEach((cpf) => {
+  const li = document.createElement("li");
+  li.textContent = formatarCpf(cpf);
+  listaCpfs.appendChild(li);
+});
+
+// excluir cpf ao clicar no botao
+function excluirCpf(cpf) {
+  const cpfIndex = cpfsList.indexOf(cpf);
+  cpfsList.splice(cpfIndex, 1);
+  localStorage.setItem("cpfs", JSON.stringify(cpfsList));
+
+  listaCpfs.innerHTML = "";
+  cpfsList.forEach((cpf) => {
+    const li = document.createElement("li");
+    li.textContent = formatarCpf(cpf);
+    listaCpfs.appendChild(li);
+  });
+}
