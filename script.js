@@ -7,14 +7,65 @@ function formatar(mascara, documento) {
   }
 }
 
+function validarCPF(cpf) {
+  cpf = cpf.replace(/\D/g, "");
+
+  if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) {
+    return false;
+  }
+
+  let soma = 0;
+  for (let i = 0; i < 9; i++) {
+    soma += parseInt(cpf.charAt(i)) * (10 - i);
+  }
+  let primeiroDigito = 11 - (soma % 11);
+  if (primeiroDigito >= 10) {
+    primeiroDigito = 0;
+  }
+
+  soma = 0;
+  for (let i = 0; i < 10; i++) {
+    soma += parseInt(cpf.charAt(i)) * (11 - i);
+  }
+  let segundoDigito = 11 - (soma % 11);
+  if (segundoDigito >= 10) {
+    segundoDigito = 0;
+  }
+
+  if (
+    primeiroDigito === parseInt(cpf.charAt(9)) &&
+    segundoDigito === parseInt(cpf.charAt(10))
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 const cpfsList = JSON.parse(localStorage.getItem("cpfs")) || [];
-const cpf = document.querySelector("#cpf");
+const cpfInput = document.querySelector("#cpf");
 
-cpf.addEventListener("change", () => {
-  const novoCpf = cpf.value;
+cpfInput.addEventListener("input", () => {
+  formatar("###.###.###-##", cpfInput);
 
-  if (cpfsList.includes(novoCpf)) {
+  const novoCpf = cpfInput.value;
+
+  if (!validarCPF(novoCpf)) {
+    cpfInput.setCustomValidity("CPF inválido");
+  } else {
+    cpfInput.setCustomValidity("");
+  }
+});
+
+cpfInput.addEventListener("blur", () => {
+  const novoCpf = cpfInput.value;
+
+  if (!validarCPF(novoCpf)) {
+    alert("CPF inválido");
+    cpfInput.value = "";
+  } else if (cpfsList.includes(novoCpf)) {
     alert("CPF já cadastrado");
+    cpfInput.value = "";
   } else {
     cpfsList.push(novoCpf);
     localStorage.setItem("cpfs", JSON.stringify(cpfsList));
