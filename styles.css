@@ -1,59 +1,71 @@
-/* Estilo para o corpo da página */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
-  margin: 0;
-  padding: 0;
-}
-
-/* Estilo para o cabeçalho */
-header {
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  padding: 10px 0;
-}
-
-/* Estilo para o container principal */
-.container {
-  max-width: 600px;
-  margin: 20px auto;
+section {
+  background-color: #0dc819;
   padding: 20px;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px #000;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  color: #000;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 1.5;
+  text-shadow: 0px 0px 5px #fff;
+  bottom: center;
 }
-
-/* Estilo para o campo de input de CPF */
-#cpfInput {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  margin-bottom: 10px;
+header {
+  flood-color: #000;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px #000;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  color: #bbf63e;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 1.5;
+  text-shadow: 0px 0px 5px #fff;
+  background-color: ;
 }
-
-/* Estilo para o botão */
+footer {
+  color: #010000;
+  background-color: aquamarine;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px #000;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  color: #000;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 1.5;
+  text-shadow: 0px 0px 5px #fff;
+}
+body {
+  background-color: rgb(0, 0, 0);
+}
 button {
-  background-color: #333;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
+  background-color: #0dc819;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px #000;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  color: #000;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 1.5;
+  text-shadow: 0px 0px 5px #fff;
 }
 
-/* Estilo para a lista de CPFs */
-#listaCpfs {
-  list-style: none;
-  padding: 0;
-}
-
-#listaCpfs li {
-  padding: 5px 0;
-  border-bottom: 1px solid #ccc;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
