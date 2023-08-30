@@ -96,17 +96,51 @@ function validar() {
   }
 }
 
-// Função para salvar os dados no localStorage e impde que CPF/CNPJ sejam salvos mais de uma vez
+// Função para salvar os dados no localStorage e impedir que CPF/CNPJ sejam salvos mais de uma vez
 function salvar() {
-  const dados = document.getElementById("info").value;
-  const documentosSalvos = localStorage.getItem("listaDocumentos");
-  const documentosArray = documentosSalvos ? JSON.parse(documentosSalvos) : [];
+  const documentoValue = infoInput.value.replace(/\D/g, ""); // Remove não dígitos
 
-  if (documentosArray.includes(dados)) {
-    alert("CPF/CNPJ já cadastrado!");
+  if (validaCPF(documentoValue) || validaCNPJ(documentoValue)) {
+    const documentosSalvos = localStorage.getItem("listaDocumentos");
+    const documentosArray = documentosSalvos
+      ? JSON.parse(documentosSalvos)
+      : [];
+
+    if (documentosArray.includes(documentoValue)) {
+      alert("CPF/CNPJ já cadastrado.");
+    } else {
+      documentosArray.push(documentoValue);
+      localStorage.setItem("listaDocumentos", JSON.stringify(documentosArray));
+      alert("CPF/CNPJ salvo com sucesso.");
+    }
   } else {
-    documentosArray.push(dados);
-    localStorage.setItem("listaDocumentos", JSON.stringify(documentosArray));
-    alert("Dados salvos com sucesso!");
+    alert("CPF/CNPJ inválido.");
   }
+}
+
+// Função para exibir os documentos salvos na lista
+function exibirDocumentosSalvos() {
+  const documentosSalvos = localStorage.getItem("listaDocumentos");
+  const lista = document.getElementById("listaDocumentos");
+
+  if (documentosSalvos) {
+    const documentosArray = JSON.parse(documentosSalvos);
+    lista.innerHTML = ""; // Limpa a lista antes de preenchê-la novamente
+
+    documentosArray.forEach((documento) => {
+      const novoItem = document.createElement("li");
+      novoItem.textContent = documento;
+      lista.appendChild(novoItem);
+    });
+  }
+}
+window.onload = function () {
+  exibirDocumentosSalvos();
+};
+
+// Função para apagar todos os documentos salvos
+function apagarDocumentos() {
+  localStorage.removeItem("listaDocumentos");
+  exibirDocumentosSalvos(); // Atualiza a lista após apagar
+  alert("Documentos apagados com sucesso.");
 }
