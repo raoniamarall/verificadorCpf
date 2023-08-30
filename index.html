@@ -4,18 +4,21 @@
     <!--Cabeçalho-->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css"
+    />
     <title>Verificador de CPF/CNPJ</title>
   </head>
-  <body>
-    <header>
-      <h1>Verificador</h1>
+  <body class="bg-gray-100">
+    <header class="p-4 bg-white">
+      <h1 class="text-2xl font-semibold">Verificador</h1>
     </header>
     <br />
     <br />
-    <section>
-      <h2>Verificador de CPF/CNPJ</h2>
-      <!--Campo de entrada para o cpf/cnpj-->
+    <section class="p-4 bg-white shadow-md rounded-md">
+      <h2 class="text-lg font-semibold mb-4">Verificador de CPF/CNPJ</h2>
+      <!-- Campo de entrada para o cpf/cnpj -->
       <input
         type="text"
         name="cpf"
@@ -23,22 +26,45 @@
         placeholder="CPF/CNPJ"
         maxlength="18"
         oninput="formatar(this)"
+        class="px-2 py-1 rounded border border-gray-300 focus:outline-none focus:border-blue-500 w-full"
         required
       />
-      <!--Botões-->
-      <button onclick="validar()">Validar CPF</button>
+      <!-- Botões -->
+      <button
+        onclick="validar()"
+        class="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+      >
+        Verificar
+      </button>
       <br />
-      <button onclick="salvar()">Salvar</button>
+      <button
+        onclick="salvar()"
+        class="mt-2 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+      >
+        Salvar
+      </button>
       <br />
-      <button onclick="apagarDocumentos()">Apagar Documentos</button>
+      <button
+        onclick="apagarDocumentos()"
+        class="mt-2 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+      >
+        Apagar Documentos
+      </button>
+      <br />
+      <button
+        onclick="apagarDocumento()"
+        class="mt-2 bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
+      >
+        Apagar um documento
+      </button>
     </section>
     <br />
-    <section>
-      <h2>Documentos Salvos:</h2>
-      <!--Lista de documentos-->
-      <ul id="listaDocumentos"></ul>
+    <section class="p-4 bg-white mt-4 shadow-md rounded-md">
+      <h2 class="text-lg font-semibold mb-4">Documentos Salvos:</h2>
+      <!-- Lista de documentos -->
+      <ul id="listaDocumentos" class="list-disc pl-6"></ul>
     </section>
-    <footer>
+    <footer class="p-4 bg-white mt-4 text-center">
       <p>sendo desenvolvido por raoni</p>
     </footer>
     <!--Script-->
