@@ -1,103 +1,103 @@
-function formatar(mascara, documento) {
-  let i = documento.value.length;
-  const saida = mascara.substring(0, 1);
-  const texto = mascara.substring(i);
-  if (texto.substring(0, 1) !== saida) {
-    documento.value += texto.substring(0, 1);
+function formatar(input) {
+  let valor = input.value;
+  valor = valor.replace(/\D/g, "");
+  if (valor.length > 11) {
+    valor = valor.replace(
+      /^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/,
+      "$1.$2.$3/$4-$5"
+    );
+  } else {
+    valor = valor.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, "$1.$2.$3-$4");
   }
+  input.value = valor;
 }
 
-function validarCPF(cpf) {
-  cpf = cpf.replace(/\D/g, "");
+const infoInput = document.getElementById("info");
 
-  if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) {
+// Função para validar CPF
+function validaCPF(cpf) {
+  if (cpf.length != 11) {
     return false;
-  }
-
-  let soma = 0;
-  for (let i = 0; i < 9; i++) {
-    soma += parseInt(cpf.charAt(i)) * (10 - i);
-  }
-  let primeiroDigito = 11 - (soma % 11);
-  if (primeiroDigito >= 10) {
-    primeiroDigito = 0;
-  }
-
-  soma = 0;
-  for (let i = 0; i < 10; i++) {
-    soma += parseInt(cpf.charAt(i)) * (11 - i);
-  }
-  let segundoDigito = 11 - (soma % 11);
-  if (segundoDigito >= 10) {
-    segundoDigito = 0;
-  }
-
-  if (
-    primeiroDigito === parseInt(cpf.charAt(9)) &&
-    segundoDigito === parseInt(cpf.charAt(10))
-  ) {
+  } else {
+    let numeros = cpf.substring(0, 9);
+    let digitos = cpf.substring(9);
+    let soma = 0;
+    for (let i = 10; i > 1; i--) {
+      soma += numeros.charAt(10 - i) * i;
+    }
+    let resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+    // Validação do primeiro dígito
+    if (resultado != digitos.charAt(0)) {
+      return false;
+    }
+    soma = 0;
+    numeros = cpf.substring(0, 10);
+    for (let k = 11; k > 1; k--) {
+      soma += numeros.charAt(11 - k) * k;
+    }
+    resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+    // Validação do segundo dígito
+    if (resultado != digitos.charAt(1)) {
+      return false;
+    }
     return true;
-  } else {
+  }
+}
+
+// Função para validar CNPJ
+function validaCNPJ(cnpj) {
+  if (cnpj.length != 14) {
     return false;
+  } else {
+    let numeros = cnpj.substring(0, 12);
+    let digitos = cnpj.substring(12);
+    let soma = 0;
+    let pos = 5;
+    for (let i = 0; i < 12; i++) {
+      soma += numeros.charAt(i) * pos--;
+      if (pos < 2) {
+        pos = 9;
+      }
+    }
+    let resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+    // Validação do primeiro dígito
+    if (resultado != digitos.charAt(0)) {
+      return false;
+    }
+    soma = 0;
+    numeros = cnpj.substring(0, 13);
+    pos = 6;
+    for (let k = 0; k < 13; k++) {
+      soma += numeros.charAt(k) * pos--;
+      if (pos < 2) {
+        pos = 9;
+      }
+    }
+    resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+    // Validação do segundo dígito
+    if (resultado != digitos.charAt(1)) {
+      return false;
+    }
+    return true;
   }
 }
 
-const cpfsList = JSON.parse(localStorage.getItem("cpfs")) || [];
-const cpfInput = document.querySelector("#cpf");
-const listaCpfs = document.getElementById("listaCpfs"); // Referência à lista de CPFs
+// Função para validar CPF ou CNPJ
+function validar() {
+  const documentoValue = infoInput.value.replace(/\D/g, ""); // Remove não dígitos
 
-cpfInput.addEventListener("input", () => {
-  formatar("###.###.###-##", cpfInput);
-
-  const novoCpf = cpfInput.value;
-
-  if (!validarCPF(novoCpf)) {
-    cpfInput.setCustomValidity("CPF inválido");
+  if (documentoValue.length === 11 && validaCPF(documentoValue)) {
+    alert("CPF válido.");
+  } else if (documentoValue.length === 14 && validaCNPJ(documentoValue)) {
+    alert("CNPJ válido.");
   } else {
-    cpfInput.setCustomValidity("");
+    alert("CPF/CNPJ inválido.");
   }
-});
-
-cpfInput.addEventListener("blur", () => {
-  const novoCpf = cpfInput.value;
-
-  if (!validarCPF(novoCpf)) {
-    alert("CPF inválido");
-    cpfInput.value = "";
-  } else if (cpfsList.includes(novoCpf)) {
-    alert("CPF já cadastrado");
-    cpfInput.value = "";
-  } else {
-    cpfsList.push(novoCpf);
-    localStorage.setItem("cpfs", JSON.stringify(cpfsList));
-    alert("CPF cadastrado com sucesso!");
-  }
-});
-
-// Função para formatar CPF para exibição
-function formatarCpf(cpf) {
-  return cpf
-    .replace(/\D/g, "")
-    .replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
 }
 
-// Preencher a lista de CPFs salvos no localStorage
-cpfsList.forEach((cpf) => {
-  const li = document.createElement("li");
-  li.textContent = formatarCpf(cpf);
-  listaCpfs.appendChild(li);
-});
-
-// excluir cpf ao clicar no botao
-function excluirCpf(cpf) {
-  const cpfIndex = cpfsList.indexOf(cpf);
-  cpfsList.splice(cpfIndex, 1);
-  localStorage.setItem("cpfs", JSON.stringify(cpfsList));
-
-  listaCpfs.innerHTML = "";
-  cpfsList.forEach((cpf) => {
-    const li = document.createElement("li");
-    li.textContent = formatarCpf(cpf);
-    listaCpfs.appendChild(li);
-  });
+// Função para salvar os dados no localStorage
+function salvar() {
+  const dados = document.getElementById("info");
+  localStorage.setItem("info", dados.value);
+  alert("Dados salvos com sucesso!");
 }
