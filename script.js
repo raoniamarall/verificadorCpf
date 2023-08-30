@@ -1,3 +1,8 @@
+// carregar lista ja salva assim que abrir a pagina
+window.onload = function () {
+  exibirDocumentosSalvos();
+};
+
 //formata cpf ou cpj
 function formatar(input) {
   let valor = input.value;
@@ -143,4 +148,24 @@ function apagarDocumentos() {
   localStorage.removeItem("listaDocumentos");
   exibirDocumentosSalvos(); // Atualiza a lista após apagar
   alert("Documentos apagados com sucesso.");
+}
+
+// Função para apagar um documento individual
+function apagarDocumento() {
+  const documentoValue = infoInput.value.replace(/\D/g, ""); // Remove não dígitos
+  const documentosSalvos = localStorage.getItem("listaDocumentos");
+
+  if (documentosSalvos) {
+    const documentosArray = JSON.parse(documentosSalvos);
+    const index = documentosArray.indexOf(documentoValue);
+
+    if (index > -1) {
+      documentosArray.splice(index, 1);
+      localStorage.setItem("listaDocumentos", JSON.stringify(documentosArray));
+      exibirDocumentosSalvos(); // Atualiza a lista após apagar
+      alert("Documento apagado com sucesso.");
+    } else {
+      alert("Documento não encontrado.");
+    }
+  }
 }
