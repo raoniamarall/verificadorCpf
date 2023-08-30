@@ -1,36 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
+    <!--Cabeçalho-->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
-    <title>Verificador de CPF</title>
+    <title>Verificador de CPF/CNPJ</title>
   </head>
   <body>
     <header>
       <h1>Verificador</h1>
     </header>
+    <br />
+    <br />
     <section>
+      <h2>Verificador de CPF/CNPJ</h2>
+      <!--Campo de entrada para o cpf/cnpj-->
       <input
         type="text"
         name="cpf"
-        id="cpf"
-        placeholder="CPF"
-        maxlength="14"
-        onkeypress="formatar('###.###.###-##', this)"
+        id="info"
+        placeholder="CPF/CNPJ"
+        maxlength="18"
+        oninput="formatar(this)"
         required
       />
-      <button onclick="salvarCpf()">salvar</button>
-      <br />
+      <!--Botões-->
+      <button onclick="salvar()">Salvar</button>
+      <button onclick="validar()">Validar CPF</button>
     </section>
+    <br />
     <section>
-      <h2>CPF(s) Salvos:</h2>
-      <ul id="listaCpfs"></ul>
-      <button onclick="excluirCpf('cpf')">Excluir CPF</button>
+      <h2>Documentos Salvos:</h2>
+      <!--Lista de documentos-->
+      <ul id="listaDocumentos"></ul>
     </section>
+    <footer>
+      <p>sendo desenvolvido por raoni</p>
+    </footer>
+    <!--Script-->
     <script src="script.js"></script>
   </body>
-  <footer>
-    <p>sendo desenvolvido por raoni</p>
-  </footer>
 </html>
