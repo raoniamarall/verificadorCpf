@@ -96,9 +96,17 @@ function validar() {
   }
 }
 
-// Função para salvar os dados no localStorage
+// Função para salvar os dados no localStorage e impde que CPF/CNPJ sejam salvos mais de uma vez
 function salvar() {
-  const dados = document.getElementById("info");
-  localStorage.setItem("info", dados.value);
-  alert("Dados salvos com sucesso!");
+  const dados = document.getElementById("info").value;
+  const documentosSalvos = localStorage.getItem("listaDocumentos");
+  const documentosArray = documentosSalvos ? JSON.parse(documentosSalvos) : [];
+
+  if (documentosArray.includes(dados)) {
+    alert("CPF/CNPJ já cadastrado!");
+  } else {
+    documentosArray.push(dados);
+    localStorage.setItem("listaDocumentos", JSON.stringify(documentosArray));
+    alert("Dados salvos com sucesso!");
+  }
 }
