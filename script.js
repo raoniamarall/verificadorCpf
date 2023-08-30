@@ -1,3 +1,4 @@
+//formata cpf ou cpj
 function formatar(input) {
   let valor = input.value;
   valor = valor.replace(/\D/g, "");
@@ -82,13 +83,13 @@ function validaCNPJ(cnpj) {
   }
 }
 
-// Função para validar CPF ou CNPJ
+// Função para aplicar validaçao no  CPF ou CNPJ
 function validar() {
   const documentoValue = infoInput.value.replace(/\D/g, ""); // Remove não dígitos
 
-  if (documentoValue.length === 11 && validaCPF(documentoValue)) {
+  if (validaCPF(documentoValue)) {
     alert("CPF válido.");
-  } else if (documentoValue.length === 14 && validaCNPJ(documentoValue)) {
+  } else if (validaCNPJ(documentoValue)) {
     alert("CNPJ válido.");
   } else {
     alert("CPF/CNPJ inválido.");
