@@ -19,23 +19,24 @@
     <section class="p-4 bg-white shadow-md rounded-md">
       <h2 class="text-lg font-semibold mb-4">Verificador de CPF/CNPJ</h2>
       <!-- Campo de entrada para o cpf/cnpj -->
-      <input
-        type="text"
-        name="cpf"
-        id="info"
-        placeholder="CPF/CNPJ"
-        maxlength="18"
-        oninput="formatar(this)"
-        class="px-2 py-1 rounded border border-gray-300 focus:outline-none focus:border-blue-500 w-full"
-        required
-      />
-      <!-- Botões -->
-      <button
-        onclick="validar()"
-        class="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-      >
-        Verificar
-      </button>
+      <div class="flex">
+        <input
+          type="text"
+          name="cpf"
+          id="info"
+          placeholder="CPF/CNPJ"
+          maxlength="18"
+          oninput="formatar(this)"
+          class="px-2 py-1 rounded border border-gray-300 focus:outline-none focus:border-blue-500 w-full"
+          required
+        />
+        <button
+          onclick="validar()"
+          class="ml-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+        >
+          Verificar
+        </button>
+      </div>
       <br />
       <button
         onclick="salvar()"
@@ -46,25 +47,24 @@
       <br />
       <button
         onclick="apagarDocumentos()"
+        style="position: absolute; bottom: 0; left: 0;"
+
         class="mt-2 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
       >
         Apagar Documentos
       </button>
       <br />
-      <button
-        onclick="apagarDocumento()"
-        class="mt-2 bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
-      >
-        Apagar um documento
+      
       </button>
     </section>
     <br />
     <section class="p-4 bg-white mt-4 shadow-md rounded-md">
       <h2 class="text-lg font-semibold mb-4">Documentos Salvos:</h2>
       <!-- Lista de documentos -->
-      <ul id="listaDocumentos" class="list-disc pl-6"></ul>
-    </section>
-    <footer class="p-4 bg-white mt-4 text-center">
+      <div class="relative">
+        <ul id="listaDocumentos" class="list-disc pl-6"></ul>
+        
+          
       <p>sendo desenvolvido por raoni</p>
     </footer>
     <!--Script-->
