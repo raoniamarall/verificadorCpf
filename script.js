@@ -123,7 +123,7 @@ function salvar() {
   }
 }
 
-// Função para exibir os documentos salvos na lista
+ // Função para exibir os documentos salvos na lista
 function exibirDocumentosSalvos() {
   const documentosSalvos = localStorage.getItem("listaDocumentos");
   const lista = document.getElementById("listaDocumentos");
@@ -135,6 +135,17 @@ function exibirDocumentosSalvos() {
     documentosArray.forEach((documento) => {
       const novoItem = document.createElement("li");
       novoItem.textContent = documento;
+
+      // Adiciona um ícone de lixeira ao lado do documento
+      const iconeLixeira = document.createElement("span");
+      iconeLixeira.innerHTML = "&#128465;";
+      iconeLixeira.style.cursor = "pointer";
+      iconeLixeira.style.marginLeft = "10px";
+      iconeLixeira.addEventListener("click", () => {
+        apagarDocumento(documento);
+      });
+      novoItem.appendChild(iconeLixeira);
+
       lista.appendChild(novoItem);
     });
   }
@@ -151,13 +162,12 @@ function apagarDocumentos() {
 }
 
 // Função para apagar um documento individual
-function apagarDocumento() {
-  const documentoValue = infoInput.value.replace(/\D/g, ""); // Remove não dígitos
+function apagarDocumento(documento) {
   const documentosSalvos = localStorage.getItem("listaDocumentos");
 
   if (documentosSalvos) {
     const documentosArray = JSON.parse(documentosSalvos);
-    const index = documentosArray.indexOf(documentoValue);
+    const index = documentosArray.indexOf(documento);
 
     if (index > -1) {
       documentosArray.splice(index, 1);
@@ -167,5 +177,5 @@ function apagarDocumento() {
     } else {
       alert("Documento não encontrado.");
     }
-  }
+}
 }
