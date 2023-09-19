@@ -30,6 +30,12 @@
           class="px-2 py-1 rounded border border-gray-300 focus:outline-none focus:border-blue-500 w-full"
           required
         />
+        <span
+          onclick="document.getElementById('info').value=''"
+          class="ml-2 text-gray-400 cursor-pointer"
+        >
+          <i class="fas fa-times"></i>
+        </span>
         <button
           onclick="validar()"
           class="ml-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
@@ -68,6 +74,8 @@
       <p>sendo desenvolvido por raoni</p>
     </footer>
     <!--Script-->
-    <script src="script.js"></script>
+    <script type="module" src="funçoes.mjs"></script>
+    <script type="module" src="script.mjs"></script>
+
   </body>
 </html>
