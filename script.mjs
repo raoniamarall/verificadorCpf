@@ -179,3 +179,4 @@ function apagarDocumento(documento) {
     }
 }
 }
+export { formatar, validaCPF, validaCNPJ, validar, salvar, exibirDocumentosSalvos, apagarDocumentos, apagarDocumento };
